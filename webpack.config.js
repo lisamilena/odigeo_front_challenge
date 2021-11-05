@@ -7,7 +7,17 @@ module.exports = {
     path: path.resolve(__dirname, 'public')
   },
   module: {
-    rules: [{
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-react']
+          }
+        }
+      }, {
         test: /\.scss$/,
         use: [
             "style-loader", 
@@ -15,5 +25,12 @@ module.exports = {
             "sass-loader"
         ]
     }]
-}
+  },
+  devServer: {
+    static: {
+      directory: path.join(__dirname, 'public'),
+    },
+    compress: true,
+    port: 9000,
+  },
 };
