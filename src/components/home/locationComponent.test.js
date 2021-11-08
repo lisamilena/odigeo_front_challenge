@@ -1,11 +1,11 @@
 
 import React from 'react';
 import renderer from 'react-test-renderer';
-import DateComponent from './dateComponent';
+import LocationComponent from './locationComponent';
 
-test('Should load default date component', () => {
+test('Should load default location component', () => {
   const component = renderer.create(
-    <DateComponent />,
+    <LocationComponent />,
   );
   console.log(component.toJSON())
   // TODO

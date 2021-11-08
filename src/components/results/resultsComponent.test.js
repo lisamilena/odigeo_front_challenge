@@ -1,11 +1,11 @@
 
 import React from 'react';
 import renderer from 'react-test-renderer';
-import DateComponent from './dateComponent';
+import ResultsComponent from './resultsComponent';
 
-test('Should load default date component', () => {
+test('Should load default result card component', () => {
   const component = renderer.create(
-    <DateComponent />,
+    <ResultsComponent />,
   );
   console.log(component.toJSON())
   // TODO

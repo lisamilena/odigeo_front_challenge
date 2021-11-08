@@ -1,11 +1,11 @@
 
 import React from 'react';
 import renderer from 'react-test-renderer';
-import DateComponent from './dateComponent';
+import SearchComponent from './searchComponent';
 
-test('Should load default date component', () => {
+test('Should load default search component', () => {
   const component = renderer.create(
-    <DateComponent />,
+    <SearchComponent />,
   );
   console.log(component.toJSON())
   // TODO
