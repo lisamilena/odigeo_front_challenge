@@ -6,21 +6,10 @@ function LocationComponent(props) {
 
   return (
     <div className="location-component">
-      <div>{value || 'no location'}</div>
-      {/* <Select
-        {...props}
-        value = {
-          locations.filter(option => 
-              option.label === 'Some label')
-        }
-        onChange = {value => console.log(value)}
-        onBlur={(val) => console.log(val, props.input.value)}
-        options={locations}
-        placeholder={placeholder}
-      /> */}
       <label for={id}>{label}:</label>
-      <select name={id} id={id} onChange={(v) => console.log(v)}>
-        {locations.map((location, key) => <option value={location} key={key}>{location}</option>)}
+      <select name={id} id={id} onChange={(e) => onChange(e.target.value)}>
+        <option hidden>Select one</option>
+        {locations.map((location, key) => <option value={location} key={key} selected={location === value}>{location}</option>)}
       </select>
     </div>
   );

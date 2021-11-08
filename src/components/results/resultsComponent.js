@@ -1,11 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
-function ResultsComponent(props) {
-  const { list } = props;
-  
+import { useContext } from '../../app.provider';
+
+function ResultsComponent({departure, arrival, departureDate}) {
+  const { itineraries, loading, loadResults } = useContext();
+
+  useEffect(() => {
+    console.log('useEffect', loadResults)
+    loadResults(departure, arrival, departureDate);
+  }, [/*loadResults*/]);
+
   return (
-    <div className="Comment">
-      <div className="Comment-text">{list || 'no items'}</div>
+    <div className="results">
+      {!itineraries.length && <div>no items</div>}
+      {/*itineraries?.map(itinerary => <div>{JSON.stringify(itinerary)}</div>)*/}
     </div>
   );
 }

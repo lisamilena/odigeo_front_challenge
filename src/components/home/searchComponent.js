@@ -1,21 +1,32 @@
-import React, {useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
+
+import { useContext } from '../../app.provider';
 import LocationComponent from './locationComponent';
 import DateComponent from './dateComponent';
 
 function SearchComponent(props) {
-  const { departure, arrival, departureDate } = props;
-  const locations = ['a', 'b', 'c'];
-  
+  const [allLocations, setLocations] = useState([]);
+  const [departure, setDeparture] = useState(props.departure);
+  const [arrival, setArrival] = useState(props.arrival);
+  const [departureDate, setDepartureDate] = useState(props.departureDate);
+
+  const { locations, loading } = useContext();
   useEffect(() => {
-    console.log(props)
-  }, []);
+    setLocations(locations);
+  }, [locations]);
+
+  const onSubmit = (event) => {
+    event.preventDefault();
+    window.location.assign("?results");
+  };
 
   return (
-    <div className="Comment">
-      <LocationComponent value={departure} locations={locations} label={'Deparute'}/>
-      <LocationComponent value={arrival} locations={locations} label={'Arrival'}/>
-      <DateComponent value={departureDate} label={'DepartureDate'} />
-    </div>
+    <form className="search-component" onSubmit={onSubmit}>
+      <LocationComponent value={departure} locations={allLocations.filter(location => location !== arrival)} label={'Deparute'} onChange={(val) => setDeparture(val)} />
+      <LocationComponent value={arrival} locations={allLocations.filter(location => location !== departure)} label={'Arrival'} onChange={(val) => setArrival(val)} />
+      <DateComponent value={departureDate} label={'Departure date'} onChange={(val) => setDepartureDate(val)}  />
+      <input type="submit" value={loading ? 'Loading ...' : 'Search'}></input>
+    </form>
   );
 }
 

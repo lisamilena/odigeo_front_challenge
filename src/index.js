@@ -3,8 +3,11 @@ import './scss/styles.scss';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
+import { AppProvider } from './app.provider';
 import SearchComponent from './components/home/searchComponent';
 import ResultsComponent from './components/results/resultsComponent';
+
+const URL_BASE = 'http://localhost:3000';
 
 class Root extends Component {
   render() {
@@ -15,11 +18,11 @@ class Root extends Component {
       departureDate: urlParams.get('departureDate')
     };
 
-    return (
+    return (<AppProvider apiUrl={URL_BASE}>{
       urlParams.get('results') !== null ?
         <ResultsComponent { ...filters } /> :
         <SearchComponent { ...filters } />
-    )
+    }</AppProvider>)
   }
 }
 
