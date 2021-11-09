@@ -17,7 +17,11 @@ function SearchComponent(props) {
 
   const onSubmit = (event) => {
     event.preventDefault();
-    window.location.assign(`?results&${new URLSearchParams({ departure, arrival, departureDate }).toString()}`);
+    const filters = { departure, arrival, departureDate };
+    for (const prop of Object.keys(filters)) {
+      !filters[prop] && delete filters[prop];
+    }
+    window.location.assign(`?results&${new URLSearchParams(filters).toString()}`);
   };
 
   return (

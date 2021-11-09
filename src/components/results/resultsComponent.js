@@ -3,11 +3,11 @@ import React, { useEffect } from 'react';
 import { useContext } from '../../app.provider';
 import ResultCardComponent from './resultCardComponent';
 
-function ResultsComponent({ departure, arrival, departureDate }) {
+function ResultsComponent({ departure, arrival, departureDate, order }) {
   const { itineraries, loading, loadResults } = useContext();
 
   useEffect(() => {
-    loadResults({ departure, arrival, departureDate });
+    loadResults({ departure, arrival, departureDate, order: order || 'asc' });
   }, [loadResults]);
 
   return (<> {

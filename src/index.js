@@ -15,7 +15,8 @@ class Root extends Component {
     const filters = {
       departure: urlParams.get('departure'),
       arrival: urlParams.get('arrival'),
-      departureDate: urlParams.get('departureDate')
+      departureDate: urlParams.get('departureDate'),
+      order: urlParams.get('order')
     };
 
     return (<AppProvider apiUrl={URL_BASE}>{

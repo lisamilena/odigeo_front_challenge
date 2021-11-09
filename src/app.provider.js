@@ -2,18 +2,21 @@ import React, { useState, useEffect, useCallback } from 'react';
 
 const AppContext = React.createContext()
 
-const filterItineraries = (data, departure, arrival, departureDate) => {
-  const emptyDeparture = !departure || departure === 'null';
-  const emptyArrival = !arrival || arrival === 'null';
-  console.log('departureDate ', departureDate)
+const filterItineraries = (data, departure, arrival, departureDate, order) => {
+  const checkDate = (filterDate, date) => {
+    const dateToFilter = new Date(filterDate);
+    return date.year === dateToFilter.getFullYear() &&
+      date.month === dateToFilter.getMonth() &&
+      date.dayOfMonth === dateToFilter.getDate();
+  };
 
   return data
     .filter(itinerary =>
-      (emptyDeparture || departure === itinerary.departureLocation) &&
-      (emptyArrival || arrival === itinerary.arrivalLocation) &&
-      (!departureDate || departureDate === 'null' /*|| departureDate === itinerary.arrivalLocation*/)
-      // TODO: filter by date => year / month / dayOfMonth
+      (!departure || departure === itinerary.departureLocation) &&
+      (!arrival || arrival === itinerary.arrivalLocation) &&
+      (!departureDate || checkDate(departureDate, itinerary.departureDate))
     )
+    .sort((a, b) => order !== 'asc' ? (b.price - a.price) : (a.price - b.price));
 };
 
 function AppProvider({ children, apiUrl }) {
@@ -36,11 +39,11 @@ function AppProvider({ children, apiUrl }) {
   }, [apiUrl])
 
   const loadResults = useCallback((filters) => {
-    const fetchMoreResults = async ({ departure, arrival, departureDate }) => {
+    const fetchMoreResults = async ({ departure, arrival, departureDate, order }) => {
       fetch(`${apiUrl}/itineraries`)
         .then(response => response.json())
         .then(data => {
-          setItineraries(filterItineraries(data, departure, arrival, departureDate));
+          setItineraries(filterItineraries(data, departure, arrival, departureDate, order));
           setLoading(false);
         })
         .catch(() => {

@@ -41,7 +41,7 @@ input, select {
 
 .results {
   width: 90%;
-  max-width: 1120px;
+  max-width: 900px;
   margin: 25px auto;
 
   .resultCard {
@@ -49,43 +49,36 @@ input, select {
     padding: 16px;
     margin-bottom: 20px;
     border-radius: 4px;
+    position: relative;
+    cursor: pointer;
+
+    .col {
+      padding-top: 5px;
+      padding-bottom: 5px;
+    }
+
+    img {
+      position: absolute;
+      right: 20px;
+    }
   }
 }
 
-.row {
-  margin: 0 -5px;
-
-  &:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
-
-  .col {
-    float: left;
-    padding: 0 10px;
-    max-width: 100%;
-
-    &.col-4 {
-      max-width: 33.333333%;
-    }
-
-    &.col-6 {
-      max-width: 50%;
-    }
-
-    &.col-8 {
-      max-width: 66.666667%;
-    }
-  }
-    
-  @media screen and (max-width: 600px) {
-    .col {
-      min-width: 100%;
-      display: block;
-      margin-bottom: 20px;
-    }
-  }
+.textxl {
+  font-size: 25px;
+  color: #111;
+}
+.textl {
+  font-size: 22px;
+  color: #272727;
+}
+.textm {
+  font-size: 16px;
+  color: #272727;
+}
+.texts {
+  font-size: 12px;
+  color: #6f6f6f;
 }
 
 .spinner {

@@ -1,6 +1,6 @@
 import React from 'react';
 
-function ResultCardComponent({ arrivalDate, departureDate, arrivalLocation, departureLocation, carrier, price }) {
+function ResultCardComponent({ arrivalDate, departureDate, arrivalLocation, departureLocation, carrier, price, url }) {
   const formatDate = (dateTime) => {
     return `${dateTime.dayOfMonth}/${dateTime.month + 1}/${dateTime.year}`;
   };
@@ -9,22 +9,34 @@ function ResultCardComponent({ arrivalDate, departureDate, arrivalLocation, depa
     return `${dateTime.hourOfDay}:${dateTime.minute}`;
   };
 
+  const formatUrl = (carrier) => {
+    const codes = {
+      spanair: 'JK',
+      klm: 'KL',
+      ryanair: 'FR',
+      lufthansa: 'LH',
+      iberia: 'IB'
+    };
+    return `https://www.edreams.es/images/onefront/airlines/sm${codes[carrier.toLowerCase()]}.gif`;
+  };
+
   return (<div className="resultCard row">
-    <div className="col col-4">
-      <div>{formatTime(departureDate)}</div>
-      <div>{departureLocation}</div>
-      <div>{formatDate(departureDate)}</div>
+    <img src={formatUrl(carrier)} alt={carrier} title={carrier} />
+    
+    <div className="col col-6 col-sm-4">
+      <div className="textl">{formatTime(departureDate)}</div>
+      <div className="texts">{formatDate(departureDate)}</div>
+      <div className="textm">{departureLocation}</div>
     </div>
 
-    <div className="col col-4">
-      <div>{formatTime(arrivalDate)}</div>
-      <div>{arrivalLocation}</div>
-      <div>{formatDate(arrivalDate)}</div>
+    <div className="col col-6 col-sm-4">
+      <div className="textl">{formatTime(arrivalDate)}</div>
+      <div className="texts">{formatDate(arrivalDate)}</div>
+      <div className="textm">{arrivalLocation}</div>
     </div>
       
-    <div className="col col-4">
-      <div>{carrier}</div>
-      <div>{price}</div>
+    <div className="col col-12 col-sm-3">
+      <div className="textxl text-right">{price} €</div>
     </div>
   </div>);
 }
