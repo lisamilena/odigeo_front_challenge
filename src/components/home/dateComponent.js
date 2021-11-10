@@ -6,7 +6,7 @@ function DateComponent(props) {
 
   return (
     <div className="location-component">
-      <label for={id}>{label}:</label>
+      {label && <label for={id}>{label}:</label>}
       <input type="date" id={id} name={id}
         value={value}
         min={min} max={max} onChange={(e) => onChange(e.target.value)} />

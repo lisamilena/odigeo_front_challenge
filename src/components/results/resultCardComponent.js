@@ -2,11 +2,11 @@ import React from 'react';
 
 function ResultCardComponent({ arrivalDate, departureDate, arrivalLocation, departureLocation, carrier, price }) {
   const formatDate = (dateTime) => {
-    return `${dateTime.dayOfMonth}/${dateTime.month + 1}/${dateTime.year}`;
+    return dateTime ? `${dateTime.dayOfMonth}/${dateTime.month + 1}/${dateTime.year}` : '-';
   };
 
   const formatTime = (dateTime) => {
-    return `${dateTime.hourOfDay}:${dateTime.minute}`;
+    return dateTime ? `${dateTime.hourOfDay}:${dateTime.minute}` : '-';
   };
 
   const formatUrl = (carrier) => {

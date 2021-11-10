@@ -6,6 +6,7 @@
   "scripts": {
     "test": "jest",
     "start": "npm install && node index.js",
+    "startNode": "node index.js",
     "build": "webpack",
     "lint": "eslint"
   },
