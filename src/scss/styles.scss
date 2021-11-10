@@ -52,6 +52,11 @@ input, select {
     position: relative;
     cursor: pointer;
 
+    &.row {
+      max-width: 100%;
+      margin-left: 0;
+    }
+
     .col {
       padding-top: 5px;
       padding-bottom: 5px;
@@ -61,6 +66,12 @@ input, select {
       position: absolute;
       right: 20px;
     }
+  }
+
+  .form-select.form-select-sm {
+    padding: 2px 5px;
+    display: inline-block;
+    width: fit-content;
   }
 }
 
@@ -87,6 +98,7 @@ input, select {
   height: 36px;
   border-radius: 50%;
   border-left-color: #01acfb;
+  margin: 25px auto;
 
   animation: spin 1s ease infinite;
 }

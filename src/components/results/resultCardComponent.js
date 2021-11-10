@@ -1,6 +1,6 @@
 import React from 'react';
 
-function ResultCardComponent({ arrivalDate, departureDate, arrivalLocation, departureLocation, carrier, price, url }) {
+function ResultCardComponent({ arrivalDate, departureDate, arrivalLocation, departureLocation, carrier, price }) {
   const formatDate = (dateTime) => {
     return `${dateTime.dayOfMonth}/${dateTime.month + 1}/${dateTime.year}`;
   };

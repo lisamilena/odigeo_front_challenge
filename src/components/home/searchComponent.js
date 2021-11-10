@@ -10,7 +10,7 @@ function SearchComponent(props) {
   const [arrival, setArrival] = useState(props.arrival);
   const [departureDate, setDepartureDate] = useState(props.departureDate);
 
-  const { locations, loading } = useContext();
+  const { locations, isLoading } = useContext();
   useEffect(() => {
     setLocations(locations);
   }, [locations]);
@@ -21,6 +21,7 @@ function SearchComponent(props) {
     for (const prop of Object.keys(filters)) {
       !filters[prop] && delete filters[prop];
     }
+    // Update params and reload
     window.location.assign(`?results&${new URLSearchParams(filters).toString()}`);
   };
 
@@ -29,7 +30,7 @@ function SearchComponent(props) {
       <LocationComponent value={departure} locations={allLocations.filter(location => location !== arrival)} label={'Deparute'} onChange={(val) => setDeparture(val)} />
       <LocationComponent value={arrival} locations={allLocations.filter(location => location !== departure)} label={'Arrival'} onChange={(val) => setArrival(val)} />
       <DateComponent value={departureDate} label={'Departure date'} onChange={(val) => setDepartureDate(val)} />
-      <input type="submit" value={loading ? 'Loading ...' : 'Search'}></input>
+      <input type="submit" value={isLoading ? 'Loading ...' : 'Search'}></input>
     </form>
   );
 }

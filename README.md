@@ -15,3 +15,4 @@ test (with Jest):
 ```sh
 $ npm run test
 ```
+

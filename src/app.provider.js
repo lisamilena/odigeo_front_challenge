@@ -39,12 +39,14 @@ function AppProvider({ children, apiUrl }) {
   }, [apiUrl])
 
   const loadResults = useCallback((filters) => {
+    setLoading(true)
     const fetchMoreResults = async ({ departure, arrival, departureDate, order }) => {
       fetch(`${apiUrl}/itineraries`)
         .then(response => response.json())
         .then(data => {
           setItineraries(filterItineraries(data, departure, arrival, departureDate, order));
-          setLoading(false);
+          // Timeout to simulate the delay of a request
+          setTimeout(() => setLoading(false), 1500);
         })
         .catch(() => {
           setItineraries([]);
@@ -53,11 +55,24 @@ function AppProvider({ children, apiUrl }) {
         });
     };
 
-    setLoading(true);
     fetchMoreResults(filters);
   }, [apiUrl]);
 
-  return <AppContext.Provider value={{ isLoading, locations, itineraries, loadResults }}>{children}</AppContext.Provider>
+  const reorderResults = useCallback((filters) => {
+    setLoading(true);
+    for (const prop of Object.keys(filters)) {
+      !filters[prop] && delete filters[prop];
+    }
+    // Update params without reload
+    window.history.pushState('', '', `?results&${new URLSearchParams(filters).toString()}`);
+    
+    setItineraries(itineraries
+      .sort((a, b) => filters.order !== 'asc' ? (b.price - a.price) : (a.price - b.price)));
+    // Timeout to simulate the delay of a request
+    setTimeout(() => setLoading(false), 500);
+  }, [itineraries]);
+
+  return <AppContext.Provider value={{ isLoading, locations, itineraries, loadResults, reorderResults }}>{children}</AppContext.Provider>
 }
 
 function useContext() {
