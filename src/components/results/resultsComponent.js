@@ -21,7 +21,7 @@ function ResultsComponent({ departure, arrival, departureDate, order }) {
         (
           !itineraries.length ?
             <div> no items </div> :
-            itineraries?.map(itinerary => < ResultCardComponent {...itinerary} />)
+            itineraries?.map((itinerary, key) => < ResultCardComponent key={key} {...itinerary} />)
         )
         
     }

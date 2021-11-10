@@ -27,7 +27,7 @@ function SearchComponent(props) {
 
   return (
     <form className="search-component" onSubmit={onSubmit}>
-      <LocationComponent value={departure} locations={allLocations.filter(location => location !== arrival)} label={'Deparute'} onChange={(val) => setDeparture(val)} />
+      <LocationComponent value={departure} locations={allLocations.filter(location => location !== arrival)} label={'Departure'} onChange={(val) => setDeparture(val)} />
       <LocationComponent value={arrival} locations={allLocations.filter(location => location !== departure)} label={'Arrival'} onChange={(val) => setArrival(val)} />
       <DateComponent value={departureDate} label={'Departure date'} onChange={(val) => setDepartureDate(val)} />
       <input type="submit" value={isLoading ? 'Loading ...' : 'Search'}></input>

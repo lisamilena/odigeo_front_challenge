@@ -45,8 +45,7 @@ function AppProvider({ children, apiUrl }) {
         .then(response => response.json())
         .then(data => {
           setItineraries(filterItineraries(data, departure, arrival, departureDate, order));
-          // Timeout to simulate the delay of a request
-          setTimeout(() => setLoading(false), 1500);
+          setLoading(false);
         })
         .catch(() => {
           setItineraries([]);

@@ -28,7 +28,7 @@ function ResultsHeaderComponent({ departure, arrival, departureDate, order }) {
       <span className="mr-2">Order:</span>
       <select class="form-select form-select-sm" onChange={(e) => reorderResults({departure, arrival, departureDate, order: e.target.value})}>
         {Object.entries(ORDERS)
-          .map(item => <option selected={item[0]===order} value={item[0]}>{item[1]}</option>)}
+          .map((item, key) => <option key={key} selected={item[0]===order} value={item[0]}>{item[1]}</option>)}
       </select>
     </div>
   </div>

@@ -2,11 +2,12 @@ import React from 'react';
 
 function ResultCardComponent({ arrivalDate, departureDate, arrivalLocation, departureLocation, carrier, price }) {
   const formatDate = (dateTime) => {
-    return dateTime ? `${dateTime.dayOfMonth}/${dateTime.month + 1}/${dateTime.year}` : '-';
+    const month = dateTime.month + 1;
+    return dateTime ? `${dateTime.dayOfMonth}/${month < 10 ? `0${month}`: month}/${dateTime.year}` : '-';
   };
 
   const formatTime = (dateTime) => {
-    return dateTime ? `${dateTime.hourOfDay}:${dateTime.minute}` : '-';
+    return dateTime ? `${dateTime.hourOfDay}:${dateTime.minute < 10 ? `0${dateTime.minute}` : dateTime.minute}` : '-';
   };
 
   const formatUrl = (carrier) => {

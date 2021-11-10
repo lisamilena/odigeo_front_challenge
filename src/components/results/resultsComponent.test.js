@@ -1,15 +1,21 @@
-
 import React from 'react';
 import renderer from 'react-test-renderer';
-import ResultsComponent from './resultsComponent';
 
-test('Should load default result card component', () => {
+import ResultsComponent from './resultsComponent';
+import TestAppProvider from '../../testAppProvider';
+
+test('Should load default results component', () => {
+  global.fetch = jest.fn(() => Promise.resolve({
+    json: () => []
+  }));
+
   const component = renderer.create(
-    <ResultsComponent />,
+    <TestAppProvider>
+      <ResultsComponent />
+    </TestAppProvider>,
   );
-  console.log(component.toJSON())
-  // TODO
 
   const tree = component.toJSON();
-  expect(tree).toMatchSnapshot();
+  expect(tree.type).toBe('div');
+  expect(tree.props.className).toBe('results');
 });
